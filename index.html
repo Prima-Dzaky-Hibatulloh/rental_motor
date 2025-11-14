@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RideNow Rental - Premium Motorcycle Rental</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #f59e0b;
+            --accent-hover: #d97706;
+            --text-light: #cbd5e1;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1558980664-2cd6638e04b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .card-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-gold {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+        }
+        
+        .section-padding {
+            padding: 100px 0;
+        }
+        
+        .text-gold {
+            color: #f59e0b;
+        }
+        
+        .border-gold {
+            border-color: #f59e0b;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #f59e0b;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .motor-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+        
+        .motor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(15, 23, 42, 0.9) 100%);
+            z-index: 1;
+        }
+        
+        .motor-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .highlight-package {
+            position: relative;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+        
+        .highlight-package::before {
+            content: "POPULAR";
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: #f59e0b;
+            color: #0f172a;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 20;
+        }
+        
+        .stats-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 10px;
+        }
+        
+        .scroll-indicator::before {
+            content: '';
+            width: 4px;
+            height: 10px;
+            background: #f59e0b;
+            border-radius: 2px;
+            animation: scroll 2s infinite;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(15px); opacity: 0; }
+        }
+
+        /* New styles for added sections */
+        .process-step {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .process-step::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(245, 158, 11, 0.3);
+            z-index: -1;
+        }
+        
+        .process-step:last-child::before {
+            display: none;
+        }
+        
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.3);
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .faq-question {
+            cursor: pointer;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question {
+            color: #f59e0b;
+        }
+        
+        .location-card {
+            transition: all 0.3s ease;
+        }
+        
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        .motor-image {
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .motor-card:hover .motor-image {
+            transform: scale(1.05);
+        }
+        
+        .motor-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(15, 23, 42, 0.95) 100%);
+            z-index: 1;
+        }
+        
+        .motor-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(245, 158, 11, 0.9);
+            color: #0f172a;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            z-index: 3;
+        }
+        
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .spec-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #cbd5e1;
+        }
+        
+        .spec-item i {
+            color: #f59e0b;
+            margin-right: 8px;
+            width: 16px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header / Navbar -->
+    <header class="fixed w-full z-50 transition-all duration-500 bg-opacity-90 backdrop-blur-md" id="navbar">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-lg">
+                        <span class="text-slate-900 font-bold text-xl">RN</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold heading-font">RideNow<span class="text-amber-500">.</span></h1>
+                        <p class="text-xs text-slate-300 -mt-1">Premium Rentals</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex space-x-10">
+                    <a href="#home" class="nav-link text-slate-200 hover:text-amber-400 font-medium">Home</a>
+                    <a href="#about" class="nav-link text-slate-200 hover:text-amber-400 font-medium">Tentang</a>
+                    <a href="#motor" class="nav-link text-slate-200 hover:text-amber-400 font-medium">Motor</a>
+                    <a href="#pricing" class="nav-link text-slate-200 hover:text-amber-400 font-medium">Harga</a>
+                    <a href="#testimonials" class="nav-link text-slate-200 hover:text-amber-400 font-medium">Testimoni</a>
+                    <a href="#process" class="nav-link text-slate-200 hover:text-amber-400 font-medium">Cara Sewa</a>
+                    <a href="#contact" class="nav-link text-slate-200 hover:text-amber-400 font-medium">Kontak</a>
+                </nav>
+                
+                <!-- CTA Button -->
+                <div class="flex items-center space-x-4">
+                    <button class="btn-gold px-6 py-3 rounded-full font-semibold shadow-lg" onclick="openWhatsApp()">
+                        <i class="fab fa-whatsapp mr-2"></i>Pesan via WhatsApp
+                    </button>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-button" class="lg:hidden text-slate-200 text-xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden lg:hidden mt-4 py-4 border-t border-slate-700">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="text-slate-200 hover:text-amber-400 font-medium py-2">Home</a>
+                    <a href="#about" class="text-slate-200 hover:text-amber-400 font-medium py-2">Tentang</a>
+                    <a href="#motor" class="text-slate-200 hover:text-amber-400 font-medium py-2">Motor</a>
+                    <a href="#pricing" class="text-slate-200 hover:text-amber-400 font-medium py-2">Harga</a>
+                    <a href="#testimonials" class="text-slate-200 hover:text-amber-400 font-medium py-2">Testimoni</a>
+                    <a href="#process" class="text-slate-200 hover:text-amber-400 font-medium py-2">Cara Sewa</a>
+                    <a href="#contact" class="text-slate-200 hover:text-amber-400 font-medium py-2">Kontak</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center relative">
+        <div class="container mx-auto px-6 pt-20 pb-32">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Hero Content -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-5xl lg:text-7xl font-bold heading-font mb-6">
+                        Premium <span class="text-amber-500">Motorcycle</span> Rental
+                    </h1>
+                    <p class="text-xl text-slate-300 mb-10 max-w-2xl">
+                        Nikmati pengalaman berkendara premium dengan armada motor terbaru dan terawat. Perjalanan Anda menjadi lebih berkelas dan tak terlupakan.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button class="btn-gold px-8 py-4 rounded-full font-semibold text-lg shadow-xl" onclick="openWhatsApp()">
+                            <i class="fab fa-whatsapp mr-2"></i>Pesan via WhatsApp
+                        </button>
+                        <button class="border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-slate-900 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300">
+                            <i class="fas fa-play-circle mr-2"></i>Lihat Video
+                        </button>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 mt-16 max-w-md">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-amber-500">500+</div>
+                            <div class="text-slate-400 text-sm">Motor Tersedia</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-amber-500">10K+</div>
+                            <div class="text-slate-400 text-sm">Pelanggan Puas</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-amber-500">24/7</div>
+                            <div class="text-slate-400 text-sm">Layanan</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Image -->
+                <div class="relative">
+                    <div class="card-glass p-8 rounded-3xl shadow-2xl animate-float">
+                        <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" 
+                             alt="Premium Motorcycle" class="rounded-2xl shadow-lg">
+                    </div>
+                    <!-- Floating Elements -->
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-amber-500 rounded-full opacity-20 animate-pulse"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-purple-500 rounded-full opacity-20 animate-pulse"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section id="about" class="section-padding">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl lg:text-5xl font-bold heading-font mb-6">Mengapa <span class="text-amber-500">RideNow</span>?</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Kami menghadirkan pengalaman rental motor premium dengan standar layanan tertinggi untuk kenyamanan perjalanan Anda.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="card-glass p-8 rounded-2xl text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-shield-alt text-2xl text-slate-900"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Asuransi Lengkap</h3>
+                    <p class="text-slate-300">Setiap rental dilengkapi dengan asuransi komprehensif untuk ketenangan berkendara Anda.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="card-glass p-8 rounded-2xl text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-motorcycle text-2xl text-slate-900"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Armada Terbaru</h3>
+                    <p class="text-slate-300">Motor-motor terbaru dengan kondisi prima dan perawatan berkala secara rutin.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="card-glass p-8 rounded-2xl text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-clock text-2xl text-slate-900"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">24/7 Support</h3>
+                    <p class="text-slate-300">Layanan pelanggan siap membantu kapan saja, termasuk di luar jam operasional.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="card-glass p-8 rounded-2xl text-center card-hover">
+                    <div class="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <i class="fas fa-map-marker-alt text-2xl text-slate-900"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Multi Lokasi</h3>
+                    <p class="text-slate-300">Tersedia di berbagai kota besar dengan sistem pemesanan yang terintegrasi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-bg py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-5xl font-bold text-amber-500 mb-2">98%</div>
+                    <div class="text-slate-300">Kepuasan Pelanggan</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-5xl font-bold text-amber-500 mb-2">15+</div>
+                    <div class="text-slate-300">Kota Tersedia</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-5xl font-bold text-amber-500 mb-2">5.0</div>
+                    <div class="text-slate-300">Rating Google</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-5xl font-bold text-amber-500 mb-2">24/7</div>
+                    <div class="text-slate-300">Layanan Darurat</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jenis Motor - SECTION YANG DIPERBAIKI -->
+    <section id="motor" class="section-padding">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl lg:text-5xl font-bold heading-font mb-6">Armada <span class="text-amber-500">Premium</span> Kami</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Pilih dari berbagai jenis motor premium kami yang selalu dalam kondisi terbaik untuk menemani perjalanan Anda.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Motor 1 - Yamaha NMAX -->
+                <div class="motor-card card-hover rounded-2xl overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="gambar_motor/nmax.jpg" 
+                             alt="Yamaha NMAX" class="w-full h-full motor-image object-cover">
+                        <div class="motor-overlay"></div>
+                        <div class="motor-badge">TERLARIS</div>
+                    </div>
+                    <div class="motor-content p-6 bg-slate-800">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold">Yamaha NMAX</h3>
+                                <p class="text-slate-400">Matic Premium 155cc</p>
+                            </div>
+                            <span class="text-2xl font-bold text-amber-500">Rp 150K<span class="text-sm font-normal text-slate-400">/hari</span></span>
+                        </div>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>45 km/L</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>155 cc</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span>Automatic</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>2 Helm</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn-gold px-4 py-2 rounded-full text-sm font-medium" onclick="openWhatsApp('Saya tertarik menyewa Yamaha NMAX')">
+                                <i class="fab fa-whatsapp mr-1"></i> Pesan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Motor 2 - Honda PCX -->
+                <div class="motor-card card-hover rounded-2xl overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="gambar_motor/pcx.jpg" 
+                             alt="Honda PCX" class="w-full h-full motor-image object-cover">
+                        <div class="motor-overlay"></div>
+                        <div class="motor-badge">PREMIUM</div>
+                    </div>
+                    <div class="motor-content p-6 bg-slate-800">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold">Honda PCX</h3>
+                                <p class="text-slate-400">Matic Executive 160cc</p>
+                            </div>
+                            <span class="text-2xl font-bold text-amber-500">Rp 140K<span class="text-sm font-normal text-slate-400">/hari</span></span>
+                        </div>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>47 km/L</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>160 cc</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span>Automatic</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>2 Helm</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <button class="btn-gold px-4 py-2 rounded-full text-sm font-medium" onclick="openWhatsApp('Saya tertarik menyewa Honda PCX')">
+                                <i class="fab fa-whatsapp mr-1"></i> Pesan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Motor 3 - Kawasaki Ninja -->
+                <div class="motor-card card-hover rounded-2xl overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="gambar_motor/ninja.jpg" 
+                             alt="Kawasaki Ninja" class="w-full h-full motor-image object-cover">
+                        <div class="motor-overlay"></div>
+                        <div class="motor-badge">SPORT</div>
+                    </div>
+                    <div class="motor-content p-6 bg-slate-800">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold">Kawasaki Ninja</h3>
+                                <p class="text-slate-400">Sport Bike 250cc</p>
+                            </div>
+                            <span class="text-2xl font-bold text-amber-500">Rp 250K<span class="text-sm font-normal text-slate-400">/hari</span></span>
+                        </div>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>28 km/L</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>250 cc</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span>Manual</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>1 Helm Full Face</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn-gold px-4 py-2 rounded-full text-sm font-medium" onclick="openWhatsApp('Saya tertarik menyewa Kawasaki Ninja')">
+                                <i class="fab fa-whatsapp mr-1"></i> Pesan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Motor 4 - Vespa Sprint -->
+                <div class="motor-card card-hover rounded-2xl overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="gambar_motor/vespa.jpg" 
+                             alt="Vespa Sprint" class="w-full h-full motor-image object-cover">
+                        <div class="motor-overlay"></div>
+                        <div class="motor-badge">CLASSIC</div>
+                    </div>
+                    <div class="motor-content p-6 bg-slate-800">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold">Vespa Sprint</h3>
+                                <p class="text-slate-400">Classic Premium 150cc</p>
+                            </div>
+                            <span class="text-2xl font-bold text-amber-500">Rp 180K<span class="text-sm font-normal text-slate-400">/hari</span></span>
+                        </div>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>40 km/L</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>150 cc</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span>Automatic</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>2 Helm Retro</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <button class="btn-gold px-4 py-2 rounded-full text-sm font-medium" onclick="openWhatsApp('Saya tertarik menyewa Vespa Sprint')">
+                                <i class="fab fa-whatsapp mr-1"></i> Pesan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Motor 5 - Honda ADV -->
+                <div class="motor-card card-hover rounded-2xl overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="gambar_motor/adv.jpeg" 
+                             alt="Honda ADV" class="w-full h-full motor-image object-cover">
+                        <div class="motor-overlay"></div>
+                        <div class="motor-badge">ADVENTURE</div>
+                    </div>
+                    <div class="motor-content p-6 bg-slate-800">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold">Honda ADV</h3>
+                                <p class="text-slate-400">Adventure 150cc</p>
+                            </div>
+                            <span class="text-2xl font-bold text-amber-500">Rp 200K<span class="text-sm font-normal text-slate-400">/hari</span></span>
+                        </div>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>42 km/L</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>150 cc</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span>Automatic</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>2 Helm Adventure</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <button class="btn-gold px-4 py-2 rounded-full text-sm font-medium" onclick="openWhatsApp('Saya tertarik menyewa Honda ADV')">
+                                <i class="fab fa-whatsapp mr-1"></i> Pesan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Motor 6 - Yamaha R15 -->
+                <div class="motor-card card-hover rounded-2xl overflow-hidden">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="gambar_motor/r15.jpg" 
+                             alt="Yamaha R15" class="w-full h-full motor-image object-cover">
+                        <div class="motor-overlay"></div>
+                        <div class="motor-badge">RACING</div>
+                    </div>
+                    <div class="motor-content p-6 bg-slate-800">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold">Yamaha R15</h3>
+                                <p class="text-slate-400">Sport Racing 155cc</p>
+                            </div>
+                            <span class="text-2xl font-bold text-amber-500">Rp 220K<span class="text-sm font-normal text-slate-400">/hari</span></span>
+                        </div>
+                        
+                        <div class="specs-grid">
+                            <div class="spec-item">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>35 km/L</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>155 cc</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-cogs"></i>
+                                <span>Manual</span>
+                            </div>
+                            <div class="spec-item">
+                                <i class="fas fa-user"></i>
+                                <span>1 Helm Racing</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mt-6">
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <button class="btn-gold px-4 py-2 rounded-full text-sm font-medium" onclick="openWhatsApp('Saya tertarik menyewa Yamaha R15')">
+                                <i class="fab fa-whatsapp mr-1"></i> Pesan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-slate-900 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300" onclick="openWhatsApp('Saya ingin melihat semua motor yang tersedia')">
+                    <i class="fas fa-motorcycle mr-2"></i>Lihat Semua Motor
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Harga / Paket -->
+    <section id="pricing" class="section-padding bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl lg:text-5xl font-bold heading-font mb-6">Paket <span class="text-amber-500">Harga</span></h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Pilih paket rental yang sesuai dengan kebutuhan Anda. Semua paket sudah termasuk asuransi dan perlengkapan standar.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Paket Matic -->
+                <div class="card-glass p-8 rounded-2xl card-hover">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Paket Matic</h3>
+                        <div class="text-4xl font-bold text-amber-500 mb-2">Rp 75K</div>
+                        <div class="text-slate-400">per hari</div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Honda Beat, Vario, Scoopy</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Bensin termasuk</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Helm 2 buah</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Asuransi dasar</span>
+                        </li>
+                    </ul>
+                    <button class="w-full border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-slate-900 py-3 rounded-xl font-semibold transition-all duration-300" onclick="openWhatsApp('Saya tertarik dengan Paket Matic')">
+                        Tanya via WhatsApp
+                    </button>
+                </div>
+                
+                <!-- Paket Manual -->
+                <div class="card-glass p-8 rounded-2xl card-hover highlight-package relative">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Paket Manual</h3>
+                        <div class="text-4xl font-bold text-amber-500 mb-2">Rp 65K</div>
+                        <div class="text-slate-400">per hari</div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Honda Supra, Revo, Blade</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Bensin termasuk</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Helm 2 buah</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Asuransi dasar</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Gratis jaket</span>
+                        </li>
+                    </ul>
+                    <button class="w-full btn-gold py-3 rounded-xl font-semibold" onclick="openWhatsApp('Saya tertarik dengan Paket Manual')">
+                        Tanya via WhatsApp
+                    </button>
+                </div>
+                
+                <!-- Paket Premium -->
+                <div class="card-glass p-8 rounded-2xl card-hover">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold mb-2">Paket Premium</h3>
+                        <div class="text-4xl font-bold text-amber-500 mb-2">Rp 150K</div>
+                        <div class="text-slate-400">per hari</div>
+                    </div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Yamaha NMAX, Aerox</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Bensin penuh</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Helm premium 2 buah</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Asuransi komprehensif</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-amber-500 mr-3"></i>
+                            <span>Gratis jaket & sarung tangan</span>
+                        </li>
+                    </ul>
+                    <button class="w-full border border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-slate-900 py-3 rounded-xl font-semibold transition-all duration-300" onclick="openWhatsApp('Saya tertarik dengan Paket Premium')">
+                        Tanya via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimoni Pelanggan -->
+    <section id="testimonials" class="section-padding">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl lg:text-5xl font-bold heading-font mb-6">Kata <span class="text-amber-500">Pelanggan</span></h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Dengarkan pengalaman langsung dari pelanggan setia RideNow Rental yang telah merasakan layanan premium kami.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimoni 1 -->
+                <div class="testimonial-card p-6 rounded-2xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-slate-900 font-bold text-xl mr-4">
+                            A
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Andi Wijaya</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 italic">"Pelayanan sangat cepat dan motor dalam kondisi prima. Sudah beberapa kali sewa di RideNow dan selalu puas! Armada premiumnya benar-benar terasa bedanya."</p>
+                </div>
+                
+                <!-- Testimoni 2 -->
+                <div class="testimonial-card p-6 rounded-2xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-slate-900 font-bold text-xl mr-4">
+                            S
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Sari Dewi</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 italic">"Harga terjangkau dengan kualitas motor yang terawat. Proses sewanya juga mudah dan cepat. Layanan 24 jam sangat membantu untuk perjalanan mendadak."</p>
+                </div>
+                
+                <!-- Testimoni 3 -->
+                <div class="testimonial-card p-6 rounded-2xl card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-slate-900 font-bold text-xl mr-4">
+                            R
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Rizky Pratama</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 italic">"Motor bersih dan nyaman dipakai. Untuk perjalanan keliling kota sangat cocok. Asuransi yang diberikan juga membuat perjalanan lebih tenang. Pasti akan sewa lagi di sini."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 1: Cara Menyewa yang Mudah -->
+    <section id="process" class="section-padding bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl lg:text-5xl font-bold heading-font mb-6">Cara <span class="text-amber-500">Menyewa</span> Mudah</h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Proses penyewaan motor di RideNow sangat sederhana. Hanya dalam 3 langkah mudah, Anda sudah bisa menikmati perjalanan dengan motor premium kami.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="process-step text-center">
+                    <div class="step-number">1</div>
+                    <h3 class="text-xl font-bold mb-4">Hubungi Kami</h3>
+                    <p class="text-slate-300">Kirim pesan via WhatsApp untuk menanyakan ketersediaan motor dan tanggal yang diinginkan.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="process-step text-center">
+                    <div class="step-number">2</div>
+                    <h3 class="text-xl font-bold mb-4">Konfirmasi & Dokumen</h3>
+                    <p class="text-slate-300">Tim kami akan memandu proses verifikasi dokumen (KTP & SIM C) dan konfirmasi pemesanan.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="process-step text-center">
+                    <div class="step-number">3</div>
+                    <h3 class="text-xl font-bold mb-4">Ambil Motor</h3>
+                    <p class="text-slate-300">Ambil motor di lokasi yang disepakati. Pembayaran dilakukan saat pengambilan motor.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <button class="whatsapp-btn px-8 py-4 rounded-full font-semibold text-lg shadow-xl" onclick="openWhatsApp()">
+                    <i class="fab fa-whatsapp mr-2"></i>Mulai Pesan via WhatsApp
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 2: FAQ yang Diperbarui -->
+    <section class="section-padding">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl lg:text-5xl font-bold heading-font mb-6">Pertanyaan <span class="text-amber-500">Umum</span></h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    Temukan jawaban untuk pertanyaan yang sering diajukan tentang layanan rental motor RideNow.
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <!-- FAQ 1 -->
+                <div class="faq-item mb-6">
+                    <div class="faq-question flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Bagaimana cara memesan motor?</h3>
+                        <i class="fas fa-chevron-down text-amber-500"></i>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-slate-300">Anda bisa langsung menghubungi kami via WhatsApp untuk menanyakan ketersediaan motor dan melakukan pemesanan. Tim customer service kami akan memandu Anda melalui prosesnya.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item mb-6">
+                    <div class="faq-question flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Kapan saya bisa melakukan pembayaran?</h3>
+                        <i class="fas fa-chevron-down text-amber-500"></i>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-slate-300">Pembayaran dilakukan pada saat pengambilan motor di lokasi. Kami menerima pembayaran tunai dan transfer bank untuk kenyamanan Anda.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item mb-6">
+                    <div class="faq-question flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Apa saja persyaratan untuk menyewa motor?</h3>
+                        <i class="fas fa-chevron-down text-amber-500"></i>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-slate-300">Anda perlu menunjukkan KTP asli dan SIM C yang masih berlaku. Untuk penyewa berusia di bawah 21 tahun, mungkin diperlukan jaminan tambahan.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item mb-6">
+                    <div class="faq-question flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Apakah ada deposit yang harus dibayar?</h3>
+                        <i class="fas fa-chevron-down text-amber-500"></i>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-slate-300">Ya, kami memerlukan deposit yang besarnya bervariasi tergantung jenis motor yang disewa. Deposit akan dikembalikan penuh saat pengembalian motor dalam kondisi baik.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="faq-item mb-6">
+                    <div class="faq-question flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Berapa lama proses pemesanan?</h3>
+                        <i class="fas fa-chevron-down text-amber-500"></i>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-slate-300">Proses pemesanan sangat cepat! Setelah konfirmasi via WhatsApp dan verifikasi dokumen, motor bisa langsung diambil pada tanggal yang disepakati.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-slate-300 mb-6">Masih ada pertanyaan? Hubungi kami kapan saja!</p>
+                <button class="whatsapp-btn px-8 py-4 rounded-full font-semibold text-lg" onclick="openWhatsApp()">
+                    <i class="fab fa-whatsapp mr-2"></i>Tanya via WhatsApp
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 3: Lokasi & Jam Operasional -->
+    <section class="section-padding bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl lg:text-5xl font-bold heading-font mb-6">Lokasi & <span class="text-amber-500">Jam Operasional</span></h2>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    RideNow tersedia di berbagai lokasi strategis. Datang langsung atau hubungi kami untuk informasi lebih lanjut.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Location 1 -->
+                <div class="location-card card-glass p-6 rounded-2xl">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-map-marker-alt text-slate-900"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Jakarta Pusat</h3>
+                            <p class="text-slate-400">Cabang Utama</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 mb-4">Jl. Merdeka No. 123, Jakarta Pusat</p>
+                    <div class="flex items-center text-slate-400 mb-2">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>07.00 - 22.00 WIB</span>
+                    </div>
+                    <div class="flex items-center text-slate-400">
+                        <i class="fas fa-phone mr-2"></i>
+                        <span>(021) 1234-5678</span>
+                    </div>
+                    <button class="w-full mt-4 whatsapp-btn py-2 rounded-lg font-semibold" onclick="openWhatsApp('Saya ingin bertanya tentang cabang Jakarta Pusat')">
+                        <i class="fab fa-whatsapp mr-2"></i>Hubungi Cabang Ini
+                    </button>
+                </div>
+                
+                <!-- Location 2 -->
+                <div class="location-card card-glass p-6 rounded-2xl">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-map-marker-alt text-slate-900"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Bandung</h3>
+                            <p class="text-slate-400">Cabang Kota Kreatif</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 mb-4">Jl. Asia Afrika No. 45, Bandung</p>
+                    <div class="flex items-center text-slate-400 mb-2">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>07.00 - 22.00 WIB</span>
+                    </div>
+                    <div class="flex items-center text-slate-400">
+                        <i class="fas fa-phone mr-2"></i>
+                        <span>(022) 9876-5432</span>
+                    </div>
+                    <button class="w-full mt-4 whatsapp-btn py-2 rounded-lg font-semibold" onclick="openWhatsApp('Saya ingin bertanya tentang cabang Bandung')">
+                        <i class="fab fa-whatsapp mr-2"></i>Hubungi Cabang Ini
+                    </button>
+                </div>
+                
+                <!-- Location 3 -->
+                <div class="location-card card-glass p-6 rounded-2xl">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-map-marker-alt text-slate-900"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">Bali</h3>
+                            <p class="text-slate-400">Cabang Pariwisata</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 mb-4">Jl. Legian No. 88, Kuta, Bali</p>
+                    <div class="flex items-center text-slate-400 mb-2">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>07.00 - 22.00 WITA</span>
+                    </div>
+                    <div class="flex items-center text-slate-400">
+                        <i class="fas fa-phone mr-2"></i>
+                        <span>(0361) 2468-1357</span>
+                    </div>
+                    <button class="w-full mt-4 whatsapp-btn py-2 rounded-lg font-semibold" onclick="openWhatsApp('Saya ingin bertanya tentang cabang Bali')">
+                        <i class="fab fa-whatsapp mr-2"></i>Hubungi Cabang Ini
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-slate-300 mb-6">Tidak yakin cabang mana yang terdekat? Hubungi customer service kami!</p>
+                <button class="btn-gold px-8 py-4 rounded-full font-semibold text-lg shadow-xl" onclick="openWhatsApp()">
+                    <i class="fas fa-headset mr-2"></i>Hubungi Customer Service
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-amber-500 to-amber-600">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl lg:text-5xl font-bold heading-font mb-6 text-slate-900">Siap Memulai Perjalanan Anda?</h2>
+            <p class="text-xl text-slate-800 mb-10 max-w-2xl mx-auto">
+                Hubungi kami via WhatsApp sekarang untuk informasi lengkap dan pemesanan motor premium.
+            </p>
+            <button class="bg-slate-900 hover:bg-slate-800 text-white px-10 py-4 rounded-full font-bold text-lg shadow-xl transition-all duration-300 transform hover:scale-105" onclick="openWhatsApp()">
+                <i class="fab fa-whatsapp mr-2"></i>Pesan via WhatsApp
+            </button>
+        </div>
+    </section>
+
+    <!-- Kontak / Footer -->
+    <footer id="contact" class="bg-slate-900 pt-20 pb-10 border-t border-slate-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center">
+                            <span class="text-slate-900 font-bold">RN</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold heading-font">RideNow<span class="text-amber-500">.</span></h3>
+                            <p class="text-xs text-slate-400 -mt-1">Premium Rentals</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 mb-6">
+                        Menyediakan layanan rental motor premium dengan standar tertinggi untuk kenyamanan perjalanan Anda.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-amber-500 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-amber-500 rounded-full flex items-center justify-center transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-slate-800 hover:bg-amber-500 rounded-full flex items-center justify-center transition-colors" onclick="openWhatsApp()">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Tautan Cepat</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-slate-400 hover:text-amber-500 transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-slate-400 hover:text-amber-500 transition-colors">Tentang Kami</a></li>
+                        <li><a href="#motor" class="text-slate-400 hover:text-amber-500 transition-colors">Jenis Motor</a></li>
+                        <li><a href="#pricing" class="text-slate-400 hover:text-amber-500 transition-colors">Paket Harga</a></li>
+                        <li><a href="#testimonials" class="text-slate-400 hover:text-amber-500 transition-colors">Testimoni</a></li>
+                        <li><a href="#process" class="text-slate-400 hover:text-amber-500 transition-colors">Cara Sewa</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Kontak Kami</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-amber-500 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Jl. Merdeka No. 123, Jakarta Pusat</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-amber-500 mt-1 mr-3"></i>
+                            <span class="text-slate-400">(021) 1234-5678</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-amber-500 mt-1 mr-3"></i>
+                            <span class="text-slate-400">info@ridenowrental.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock text-amber-500 mt-1 mr-3"></i>
+                            <span class="text-slate-400">Senin - Minggu: 07.00 - 22.00 WIB</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- WhatsApp CTA -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Pesan Sekarang</h4>
+                    <p class="text-slate-400 mb-4">Hubungi kami via WhatsApp untuk pemesanan cepat dan informasi lengkap.</p>
+                    <button class="w-full whatsapp-btn py-3 rounded-lg font-semibold flex items-center justify-center" onclick="openWhatsApp()">
+                        <i class="fab fa-whatsapp mr-2 text-xl"></i>
+                        WhatsApp Kami
+                    </button>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 text-center">
+                <p class="text-slate-500">© 2025 RideNow Rental. All rights reserved. | Designed with <i class="fas fa-heart text-amber-500"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Navbar background on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate-900', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-slate-900', 'shadow-lg');
+            }
+        });
+        
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        window.addEventListener('load', fadeInOnScroll);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // FAQ Accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+        
+        // WhatsApp Function
+        function openWhatsApp(message = 'Halo, saya ingin bertanya tentang rental motor di RideNow') {
+            const phoneNumber = '6281234567890'; // Ganti dengan nomor WhatsApp bisnis Anda
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        }
+        
+        // Initialize animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in class to elements that should animate
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const children = section.children;
+                for (let i = 0; i < children.length; i++) {
+                    if (i > 0) { // Skip first child (usually the container)
+                        children[i].classList.add('fade-in');
+                    }
+                }
+            });
+            
+            // Trigger initial fade in
+            fadeInOnScroll();
+        });
+    </script>
+</body>
+</html>
